@@ -1,0 +1,36 @@
+{
+  "name": "@tdqs/koa-log4js",
+  "version": "0.0.1",
+  "description": "基于log4js的koa中间件",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "nodemon ./tests/server",
+    "build": "tsc --build tsconfig.json",
+    "clean": "rimraf dist",
+    "publish": "npm --registry https://registry.npmjs.org publish --access public",
+    "upload": "npm-run-all --serial clean build publish"
+  },
+  "keywords": [
+    "koa-log4js",
+    "middleware",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaoziqi/-tdqs-koa-log4js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gaoziqi/-tdqs-koa-log4js/issues"
+  },
+  "homepage": "https://github.com/gaoziqi/-tdqs-koa-log4js#readme",
+  "author": "gzq",
+  "license": "MIT",
+  "dependencies": {
+    "log4js": "^3.0.6"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.0.47",
+    "@types/node": "^10.12.18",
+    "koa": "^2.6.2"
+  }
+}
