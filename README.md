@@ -1,8 +1,8 @@
-# **@tdqs/koa-api**
+# **@tdqs/koa-log4js**
 
 The MIT License (MIT)
 
-@tdqs/koa-api koa middleware.
+@tdqs/koa-log4js koa middleware.
 
 ### Table of Contents
 
@@ -13,7 +13,7 @@ The MIT License (MIT)
 ## **Installation**
 
 ```
-    $ npm install @tdqs/koa-api
+    $ npm install @tdqs/koa-log4js
 ```
 
 ## **API documentation**
@@ -21,60 +21,33 @@ The MIT License (MIT)
 #### Getting Started
 
 ```ts
-import { api, cls, koaApi } from '@tdqs/koa-api';
 import * as Koa from 'koa';
+import { resolve } from 'path';
+import { koaLog } from '@tdqs/koa-log4js';
 
 const app = new Koa();
 
-@cls()
-class Test {
-  @api()
-  public static hello(ctx) {
-    return 'hello world';
-  }
-}
+app.use(koaLog({ mode: 'debug' })).listen(8080);
 
-app.use(koaApi({}, Test)).listen(8080);
-
-//GET localhost:8080/docs       Api document
-//GET localhost:8080/hello      Response 'hello world'
+// default path /var/log/app.log
 ```
 
-#### jsonschema & middlewares simplification
+#### Options
 
 ```ts
-import { api, cls, IApiContext } from '../src/index';
-
-@cls({
-  name: '测试schema',
-  prefix: '/schema',
-})
-export class Schema {
-  @api({
-    method: 'POST',
-    middlewares: [
-      async (ctx, next) => {
-        const start = new Date().getTime();
-        await next();
-        const ms = new Date().getTime() - start;
-        ctx.body = {
-          ms,
-          text: ctx.body,
-        };
-      },
-    ],
-    schema: {
-      properties: {
-        p: { type: 'string' },
-        q: { type: 'number' },
-      },
-      required: ['p', 'q'],
-      type: 'object',
-    },
-  })
-  public static hello(ctx: IApiContext) {
-    return `hello world ${JSON.stringify(ctx.data)}`;
-  }
+export interface IOption {
+  /** project name */
+  name: string;
+  /** FileAppender */
+  file: Partial<log4js.FileAppender>;
+  /** Layout */
+  layout: Partial<log4js.Layout>;
+  /** mode */
+  mode: 'debug' | 'default';
+  /** format */
+  format: string;
+  /** regexp url */
+  nolog: RegExp | string;
 }
 ```
 
