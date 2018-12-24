@@ -8,13 +8,6 @@
 import { Middleware } from 'koa';
 import { levels, Logger } from 'log4js';
 
-declare module 'koa' {
-  // tslint:disable-next-line:interface-name
-  interface Context {
-    log: Logger;
-  }
-}
-
 function createNoLogCondition(nolog: RegExp | string) {
   let regexp: RegExp;
 

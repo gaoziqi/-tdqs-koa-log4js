@@ -9,6 +9,13 @@ import { Middleware } from 'koa';
 import * as log4js from 'log4js';
 import { getLogger } from './middleware';
 
+declare module 'koa' {
+  // tslint:disable-next-line:interface-name
+  interface Context {
+    log: log4js.Logger;
+  }
+}
+
 export interface IOption {
   /** 项目名称 */
   name: string;

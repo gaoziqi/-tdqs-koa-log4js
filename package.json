@@ -1,6 +1,6 @@
 {
   "name": "@tdqs/koa-log4js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "基于log4js的koa中间件",
   "main": "dist/index.js",
   "scripts": {

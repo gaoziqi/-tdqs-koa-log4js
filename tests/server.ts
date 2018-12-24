@@ -12,4 +12,7 @@ app
       },
     }),
   )
+  .use(ctx => {
+    ctx.log.info(`${ctx.path}`);
+  })
   .listen(8080);
